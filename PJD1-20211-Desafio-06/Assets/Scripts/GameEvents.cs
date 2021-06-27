@@ -8,10 +8,22 @@ public class EventIntInt : UnityEvent<int, int> { }
 public class EventFireWeapon : UnityEvent<int, int, WeaponType> { }
 
 public class EventReloadWeapon : UnityEvent<float, int, WeaponType> { }
+public class EventCurrentAmmo : UnityEvent<float, int, WeaponType> { }
+public class EventPlayerHp : UnityEvent<int, int> { }
+public class EventEnemyHp : UnityEvent<int, int> { }
+public class EventEnemyDamage : UnityEvent<int> { }
 
 public class GameEvents : MonoBehaviour
 {
     static public EventReloadWeapon WeaponReloadEvent = new EventReloadWeapon();
+
+    static public EventCurrentAmmo PlayerCurrentAmmo = new EventCurrentAmmo();
+
+    static public EventPlayerHp PlayerHpEvent = new EventPlayerHp();
+
+    static public EventEnemyHp EnemyHpEvent = new EventEnemyHp();
+
+    static public EventEnemyDamage EnemyDamageEvent = new EventEnemyDamage();
 
     static public EventFireWeapon WeaponFireEvent = new EventFireWeapon();
 

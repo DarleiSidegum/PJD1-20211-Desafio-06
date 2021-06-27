@@ -38,6 +38,20 @@ public class GameController : MonoBehaviour
         }
     }
 
+    static public void EnnemyDamageTrigger(EnemyController damage, Collision2D collision)
+    {
+        PlayerController player = collision.gameObject.GetComponent<PlayerController>();
+
+        if (player)
+        {
+            if (player.ApplyDamage(damage.Damage))
+            {
+                Destroy(player.gameObject);
+            }
+             
+        }
+    }
+
     static public int CheckReloadPlayerAmmunition(WeaponType type)
     {
         return player.GetAmmunition(type);

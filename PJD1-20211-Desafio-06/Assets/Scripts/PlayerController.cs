@@ -8,7 +8,8 @@ public class PlayerController : Rigidbody2DBase
 {
     public Text debug;
 
-    public int Hp { get; protected set; }
+    public int CurrentHp { get; protected set; }
+    public int MaxHp { get; protected set; }
 
     public GameObject bulletPrefab;
 
@@ -61,8 +62,17 @@ public class PlayerController : Rigidbody2DBase
         GameEvents.WeaponFireEvent.Invoke(CurrentWeapon.Ammo, CurrentWeapon.weaponDTO.AmmoMax, CurrentWeapon.Type);
     }
 
+    public bool ApplyDamage(int damage)
+    {
+        CurrentHp -= damage;
+        GameEvents.PlayerHpEvent.Invoke(CurrentHp, MaxHp);
+        return CurrentHp <= 0;
+    }
+
     protected virtual void Start()
     {
+        MaxHp = 100;
+        CurrentHp = MaxHp;
         GameEvents.WeaponFireEvent.Invoke(CurrentWeapon.Ammo, CurrentWeapon.weaponDTO.AmmoMax, CurrentWeapon.Type);
     }
 

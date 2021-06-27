@@ -4,27 +4,25 @@ using UnityEngine;
 
 public class EnemyController : Rigidbody2DBase, IPoolableObject
 {
-    public int Hp { get; protected set; }
+    public int MaxHp { get; protected set; }
+    public int CurrentHp { get; protected set; }
+    public int Damage = 10;
+    
 
     private void Start()
     {
-        Hp = Random.Range(100, 201);
+        MaxHp = Random.Range(100, 201);
+        CurrentHp = MaxHp;
+        
     }
 
     public bool ApplyDamage(int damage)
     {
-        Hp -= damage;
-        /*
-        if(Hp <= 0)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-        */
-        return Hp <= 0;
+        CurrentHp -= damage;
+  
+        GameEvents.EnemyHpEvent.Invoke(CurrentHp, MaxHp);
+        GameEvents.EnemyDamageEvent.Invoke(damage);
+        return CurrentHp <= 0;
     }
 
     public void Recycle()
@@ -36,5 +34,10 @@ public class EnemyController : Rigidbody2DBase, IPoolableObject
     {
         gameObject.SetActive(true);
         Start();
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        GameController.EnnemyDamageTrigger(this, collision);
     }
 }
