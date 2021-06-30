@@ -16,10 +16,21 @@ public class EnemyController : Rigidbody2DBase, IPoolableObject
     private void Start()
     {
 
+
         Hp = MaxHp = Random.Range(100, 201);
         HUDhp = GetComponentInChildren<Image>();
         HUDdamage = GetComponentInChildren<Text>();
         
+
+        //currentTarget = point1;
+
+        map = GetComponent<NavMeshAgent>();
+        map.updateRotation = false;
+        map.updateUpAxis = false;
+
+        //adiciona o icon do enemy no minimapa
+        IconCreator.AddIcon(transform, 1);
+
     }
 
 

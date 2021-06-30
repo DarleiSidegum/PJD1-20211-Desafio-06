@@ -78,7 +78,12 @@ public class PlayerController : Rigidbody2DBase
 
         Hp = MaxHp = 100;
         GameEvents.WeaponFireEvent.Invoke(CurrentWeapon.Ammo, CurrentWeapon.weaponDTO.AmmoMax, CurrentWeapon.Type);
+
     
+
+        //adiciona o icon do player no minimapa
+        IconCreator.AddIcon(transform, 0);
+
     }
 
 
