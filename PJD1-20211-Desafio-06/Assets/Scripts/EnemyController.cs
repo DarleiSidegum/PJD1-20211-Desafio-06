@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.AI;
 
 
 public class EnemyController : Rigidbody2DBase, IPoolableObject
@@ -9,6 +10,10 @@ public class EnemyController : Rigidbody2DBase, IPoolableObject
     public int MaxHp { get; protected set; }
     public int Hp { get; protected set; }
     public int Damage = 10;
+    
+    
+    private NavMeshAgent map;
+    
 
     public Image HUDhp;
     public Text HUDdamage;
